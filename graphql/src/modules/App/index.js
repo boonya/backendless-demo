@@ -1,11 +1,9 @@
 import './App.css';
-import Greetings from './components/Greetings';
-import ApolloProvider from './providers/Apollo';
-import MeProvider from './providers/Me';
+import Greetings from '../../components/Greetings';
+import MeProvider from '../../providers/Me';
 
 export default function App() {
   return (
-    <ApolloProvider>
       <MeProvider>
         <div className="App">
           <header className="App-header">
@@ -21,6 +19,5 @@ export default function App() {
           </header>
         </div>
       </MeProvider>
-    </ApolloProvider>
   );
 }

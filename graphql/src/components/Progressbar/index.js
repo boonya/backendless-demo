@@ -1,10 +1,11 @@
+import './Progressbar.css';
 import React, {forwardRef} from 'react';
 
 const Progressbar = forwardRef((props, ref) => {
   return (
-    <div ref={ref} role="progressbar" {...props}>
+    <p ref={ref} role="progressbar" className="progressbar" {...props}>
       Please wait...
-    </div>
+    </p>
   );
 });
 

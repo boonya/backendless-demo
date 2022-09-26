@@ -36,6 +36,17 @@ function extract({data}) {
 /**
  * @returns {Result}
  */
+export function useResponse(state) {
+  return {
+    data: state.data && extract(state),
+    loading: Boolean(state.loading),
+    error: state.error,
+  }
+}
+
+/**
+ * @returns {Result}
+ */
 export default function useFetchMe() {
   const state = useQuery(gql`query FetchMe {
     viewer {
@@ -47,9 +58,5 @@ export default function useFetchMe() {
     }
   }`);
 
-  return {
-    data: state.data && extract(state),
-    loading: Boolean(state.loading),
-    error: state.error,
-  }
+  return useResponse(state);
 }
