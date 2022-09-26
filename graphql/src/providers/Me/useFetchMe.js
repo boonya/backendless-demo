@@ -1,5 +1,6 @@
 import {useQuery, gql} from '@apollo/client';
 import PropTypes from 'prop-types';
+import {pick} from '../../utils/functions';
 
 /**
  * @typedef {object} Me
@@ -16,6 +17,14 @@ export const ME_SHAPE = {
   url: PropTypes.string.isRequired,
   websiteUrl: PropTypes.string.isRequired,
 };
+
+/**
+ * @param {object} response
+ * @returns {Me}
+ */
+function extract({data}) {
+  return pick(data.viewer, Object.keys(ME_SHAPE));
+}
 
 /**
  * @typedef {object} Result
@@ -39,7 +48,7 @@ export default function useFetchMe() {
   }`);
 
   return {
-    data: state.data?.viewer,
+    data: state.data && extract(state),
     loading: Boolean(state.loading),
     error: state.error,
   }
