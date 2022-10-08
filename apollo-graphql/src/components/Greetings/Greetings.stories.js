@@ -3,6 +3,8 @@ import ME_NONAME_RESPONSE from '../../providers/Me/__response__/noname';
 import MeFakeProvider from '../../providers/Me/FakeProvider';
 import withProvider from '../../../.storybook/decorators/withProvider';
 
+export default {title: 'components/Greetings'};
+
 export function Loading() {
   return <Greetings />;
 }
@@ -23,5 +25,3 @@ export function ShowFallbackName() {
 ShowFallbackName.decorators = [
   withProvider(MeFakeProvider, ME_NONAME_RESPONSE),
 ];
-
-export default {title: 'components/Greetings'};

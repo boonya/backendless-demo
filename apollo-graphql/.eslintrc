@@ -1,5 +1,9 @@
 {
-  "extends": ["react-app", "react-app/jest"],
+  "extends": ["react-app", "react-app/jest", "plugin:storybook/recommended"],
+  "rules": {
+    "semi": "warn",
+    "quotes": "warn"
+  },
   "overrides": [
     {
       "files": ["**/*.stories.*"],

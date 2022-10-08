@@ -2,7 +2,7 @@ import { initialize, mswDecorator } from 'msw-storybook-addon';
 import withApollo from './decorators/withApollo'
 
 // Initialize MSW
-initialize();
+initialize()
 
 export const decorators = [
   withApollo(),
@@ -14,7 +14,7 @@ export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
-      color: /(background|color)$/i,
+        color: /(background|color)$/i,
       date: /Date$/,
     },
   },

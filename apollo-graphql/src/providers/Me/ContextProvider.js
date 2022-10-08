@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client';
 import PropTypes from 'prop-types';
 import {createContext} from 'react';
 import useSafeContext from '../../hooks/useSafeContext';
@@ -25,7 +26,7 @@ ContextProvider.displayName = 'Me.ContextProvider';
 ContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
   data: PropTypes.shape(ME_SHAPE),
-  error: PropTypes.instanceOf(Error),
+  error: PropTypes.instanceOf(ApolloError),
   loading: PropTypes.bool,
 };
 
