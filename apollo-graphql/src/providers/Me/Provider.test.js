@@ -2,7 +2,7 @@ import DataProvider from '.';
 import {renderComponent} from '../../../test/render';
 import {makeQueryResult} from '../../../test/utils/apollo';
 import ContextProvider from './ContextProvider';
-import ME_DATA from './__data__/successful.json';
+import ME_DATA from './__data__/successful';
 import ME_RESPONSE_ERROR from './__response__/ValidationError.json';
 import ME_RESPONSE from './__response__/successful.json';
 import {ApolloError, useQuery} from '@apollo/client';
@@ -60,7 +60,7 @@ describe('should interpolate response on to the context', () => {
 		expect(ContextProvider).toBeCalledTimes(1);
 		expect(ContextProvider).toBeCalledWith({
 			children: 'children',
-			data: ME_DATA,
+			data: ME_DATA.data,
 			loading: false,
 			error: undefined,
 		}, {});

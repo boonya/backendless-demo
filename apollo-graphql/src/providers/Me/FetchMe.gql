@@ -1,9 +1,11 @@
 query FetchMe {
-  viewer {
-    login
-    name
-    avatarUrl
-    url
-    websiteUrl
-  }
+	viewer {
+		login
+		name
+		avatarUrl
+		url
+		websiteUrl
+		updatedAt
+		createdAt
+	}
 }

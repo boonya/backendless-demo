@@ -12,6 +12,8 @@ const QUERY_FETCH_ME = loader('./FetchMe.gql');
  * @property {string} avatarUrl
  * @property {string} url
  * @property {string} websiteUrl
+ * @property {Date} updatedAt
+ * @property {Date} createdAt
  */
 export const ME_SHAPE = {
 	login: PropTypes.string.isRequired,
@@ -19,6 +21,8 @@ export const ME_SHAPE = {
 	avatarUrl: PropTypes.string.isRequired,
 	url: PropTypes.string.isRequired,
 	websiteUrl: PropTypes.string.isRequired,
+	updatedAt: PropTypes.instanceOf(Date).isRequired,
+	createdAt: PropTypes.instanceOf(Date).isRequired,
 };
 
 /**
@@ -26,7 +30,17 @@ export const ME_SHAPE = {
  * @returns {Me}
  */
 function extract({data}) {
-	return pick(data?.viewer, Object.keys(ME_SHAPE));
+	const result = pick(data?.viewer, Object.keys(ME_SHAPE));
+
+	if (!result) {
+		return null;
+	}
+
+	return {
+		...result,
+		updatedAt: result?.updatedAt && new Date(result.updatedAt),
+		createdAt: result?.createdAt && new Date(result.createdAt),
+	};
 }
 
 /**

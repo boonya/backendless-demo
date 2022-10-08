@@ -1,16 +1,15 @@
 import App from '.';
 import wrapper from '../../../test/decorators/wrapper';
-import {makeQueryResult} from '../../../test/utils/apollo';
 import MeProvider from '../../providers/Me';
-import MeFakeProvider from '../../providers/Me/FakeProvider';
-import ME_RESPONSE_ERROR from '../../providers/Me/__response__/ValidationError.json';
-import ME_RESPONSE from '../../providers/Me/__response__/successful.json';
+import MeContextProvider from '../../providers/Me/ContextProvider';
+import ME_DATA from '../../providers/Me/__data__/successful';
+import {ApolloError} from '@apollo/client';
 import {render, screen} from '@testing-library/react';
 
 jest.mock('../../providers/Me');
 
 it('should render Greetings if loading.', () => {
-	MeProvider.mockImplementation(wrapper(makeQueryResult({loading: true}), MeFakeProvider));
+	MeProvider.mockImplementation(wrapper({loading: true}, MeContextProvider));
 
 	render(<App />);
 
@@ -18,7 +17,7 @@ it('should render Greetings if loading.', () => {
 });
 
 it('should render Greetings if error.', () => {
-	MeProvider.mockImplementation(wrapper(makeQueryResult(ME_RESPONSE_ERROR), MeFakeProvider));
+	MeProvider.mockImplementation(wrapper({error: new ApolloError({graphQLErrors: []})}, MeContextProvider));
 
 	render(<App />);
 
@@ -26,7 +25,7 @@ it('should render Greetings if error.', () => {
 });
 
 it('should render Greetings if success.', () => {
-	MeProvider.mockImplementation(wrapper(makeQueryResult(ME_RESPONSE), MeFakeProvider));
+	MeProvider.mockImplementation(wrapper(ME_DATA, MeContextProvider));
 
 	render(<App />);
 

@@ -8,5 +8,6 @@ export default function Greetings() {
 		return <Progressbar />;
 	}
 
-	return <p>Hello, {data?.name ? data.name : 'Mr(s)'}!</p>;
+	const name = data?.name || 'Mr(s)';
+	return <p>Hello, {name}!</p>;
 }

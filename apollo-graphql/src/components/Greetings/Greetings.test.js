@@ -1,27 +1,28 @@
 import Greetings from '.';
+import {renderComponent} from '../../../test/render';
 import {useMe} from '../../providers/Me/ContextProvider';
-import ME_DATA from '../../providers/Me/__data__/successful.json';
-import {render, screen} from '@testing-library/react';
+import ME_DATA from '../../providers/Me/__data__/successful';
+import {screen} from '@testing-library/react';
 
 jest.mock('../../providers/Me/ContextProvider');
 
-function renderComponent() {
-	return render(<Greetings />);
+function render() {
+	return renderComponent(<Greetings />);
 }
 
 it('should render progressbar.', () => {
 	useMe.mockReturnValue({loading: true});
 
-	renderComponent();
+	render();
 
 	expect(screen.queryByText(/Hello/u)).not.toBeInTheDocument();
 	screen.getByRole('progressbar');
 });
 
 it('should render user name.', () => {
-	useMe.mockReturnValue({data: ME_DATA});
+	useMe.mockReturnValue(ME_DATA);
 
-	renderComponent();
+	render();
 
 	screen.getByText('Hello, Dude Dudovich!');
 });
@@ -29,7 +30,7 @@ it('should render user name.', () => {
 it('should render "Dude" as a fallback value.', () => {
 	useMe.mockReturnValue({});
 
-	renderComponent();
+	render();
 
 	screen.getByText('Hello, Mr(s)!');
 });
