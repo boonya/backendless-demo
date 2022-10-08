@@ -1,0 +1,25 @@
+{
+  "extends": ["react-app", "react-app/jest"],
+  "overrides": [
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    },
+    {
+      "files": ["**/*.stories.*", "**/*.test.js"],
+      "rules": {
+        "react/no-multi-comp": "off",
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["**/__response__/*", "**/__data__/*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off",
+        "max-len": "off"
+      }
+    }
+  ]
+}

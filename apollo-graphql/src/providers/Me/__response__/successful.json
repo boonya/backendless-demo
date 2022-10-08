@@ -1,4 +1,4 @@
-export default {
+{
   "data": {
     "viewer": {
       "login": "superdude",
@@ -9,4 +9,4 @@ export default {
       "__typename": "User"
     }
   }
-};
+}
