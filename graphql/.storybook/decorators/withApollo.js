@@ -27,35 +27,25 @@ export default function withApollo(props) {
 
 /**
  * @typedef {object} MswCallbackOptions
- * @property {number} [options.status] http status code (200 by default, 500 in case of error)
+ * @property {number} [options.statusCode] http status code (200 by default, 500 in case of error)
  * @property {number} [options.delay] delay to response in milliseconds (300 by default)
- * @property {Error} [options.error] An error object to throw
  *
- * @param {string} operation
  * @param {object} response
  * @param {MswCallbackOptions} [options]
+ * @param {string} [operation]
  * @returns {Function}
  */
-function createMswCallback(operation, response, options = {}) {
-  const {error} = options;
-
-  const delay = options.delay || 300;
-  const status = options.status || error ? 500 : 200;
+function createMswCallback(response, options, operation) {
+  const delay = options?.delay || 300;
+  const statusCode = options?.statusCode || 200;
 
   return async (req, res, ctx) => {
-    const args = [
+    return res(
       ctx.delay(delay),
-      ctx.status(status),
-    ];
-
-    if (error) {
-      args.push(ctx.data({error}));
-    }
-    else {
-      args.push(ctx.data(response));
-    }
-
-    return res(...args);
+      ctx.status(statusCode),
+      response?.data && ctx.data(response?.data),
+      response?.errors && ctx.errors(response?.errors),
+    );
   };
 }
 
@@ -68,7 +58,7 @@ function createMswCallback(operation, response, options = {}) {
  * @returns {object}
  */
 export function query(queryName, response, options) {
-  return graphql.query(queryName, createMswCallback(`query ${queryName}`, response, options));
+  return graphql.query(queryName, createMswCallback(response, options, `query ${queryName}`));
 }
 
 /**
@@ -80,5 +70,5 @@ export function query(queryName, response, options) {
  * @returns {object}
  */
 export function mutation(mutationName, response, options) {
-  return graphql.mutation(mutationName, createMswCallback(`mutation ${mutationName}`, response, options));
+  return graphql.mutation(mutationName, createMswCallback(response, options, `mutation ${mutationName}`));
 }

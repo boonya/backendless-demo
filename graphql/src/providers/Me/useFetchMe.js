@@ -23,14 +23,14 @@ export const ME_SHAPE = {
  * @returns {Me}
  */
 function extract({data}) {
-  return pick(data.viewer, Object.keys(ME_SHAPE));
+  return pick(data?.viewer, Object.keys(ME_SHAPE));
 }
 
 /**
  * @typedef {object} Result
  * @property {Me} [data]
  * @property {boolean} loading
- * @property {Error} [error]
+ * @property {import('@apollo/client').ApolloError} [error]
  */
 
 /**

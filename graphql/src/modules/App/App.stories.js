@@ -1,6 +1,7 @@
 import App from '.';
-import withApollo, {query} from '../../../.storybook/decorators/withApollo';
+import {query} from '../../../.storybook/decorators/withApollo';
 import ME_RESPONSE from '../../providers/Me/__response__/successful';
+import ME_RESPONSE_VALIDATION_ERROR from '../../providers/Me/__response__/ValidationError';
 
 export function Fulfilled() {
   return <App />
@@ -20,12 +21,7 @@ export function FailedQuery() {
   return <App />
 }
 FailedQuery.parameters = {msw: {handlers: [
-  query('FetchMe', ME_RESPONSE, {error: 500}),
+  query('FetchMe', ME_RESPONSE_VALIDATION_ERROR),
 ]}};
 
-export default {
-  title: 'modules/App',
-  decorators: [
-    withApollo(),
-  ],
-};
+export default {title: 'modules/App'};

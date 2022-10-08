@@ -3,7 +3,9 @@ import DataProvider from '.';
 import ContextProvider from './ContextProvider';
 import {useQuery} from '@apollo/client';
 import ME_RESPONSE from './__response__/successful';
+import ME_RESPONSE_ERROR from './__response__/error';
 import ME_DATA from './__data__/successful';
+import {translateResponseToApolloObject} from '../../../test/utils/apolloResponse';
 
 jest.mock('@apollo/client');
 jest.mock('./ContextProvider');
@@ -51,8 +53,7 @@ describe('should interpolate response on to the context', () => {
   });
 
   it('error', () => {
-    const error = new Error('Test');
-    useQuery.mockReturnValue({error});
+    useQuery.mockReturnValue(translateResponseToApolloObject(ME_RESPONSE_ERROR));
 
     renderComponent();
 
@@ -61,12 +62,12 @@ describe('should interpolate response on to the context', () => {
       children: 'children',
       data: undefined,
       loading: false,
-      error,
+      error: new Error('Apollo Error'),
     }, {});
   });
 
   it('data', () => {
-    useQuery.mockReturnValue({data: ME_RESPONSE});
+    useQuery.mockReturnValue(translateResponseToApolloObject(ME_RESPONSE));
 
     renderComponent();
 

@@ -9,5 +9,5 @@ export default function Greetings() {
     return <Progressbar />
   }
 
-  return <p>Hello, {data?.name ? data.name : 'Dude'}!</p>;
+  return <p>Hello, {data?.name ? data.name : 'Mr(s)'}!</p>;
 }

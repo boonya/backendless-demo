@@ -21,7 +21,7 @@ export function ShowFallbackName() {
   return <Greetings />;
 }
 ShowFallbackName.decorators = [
-  withProvider(MeFakeProvider, {data: ME_NONAME_RESPONSE}),
+  withProvider(MeFakeProvider, ME_NONAME_RESPONSE),
 ];
 
 export default {title: 'components/Greetings'};

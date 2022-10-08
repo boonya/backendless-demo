@@ -4,7 +4,7 @@ import {useResponse} from './useFetchMe';
 import PropTypes from 'prop-types';
 
 export default function FakeProvider({children, ...response}) {
-  const payload = useResponse({data: ME_RESPONSE, ...response});
+  const payload = useResponse({...ME_RESPONSE, ...response});
 
   return <ContextProvider {...payload}>{children}</ContextProvider>;
 }
