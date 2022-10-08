@@ -53,19 +53,12 @@ function extract({data}) {
 /**
  * @returns {Result}
  */
-export function useResponse(state) {
+export default function useFetchMe() {
+	const state = useQuery(QUERY_FETCH_ME);
+
 	return {
 		data: state.data && extract(state),
 		loading: Boolean(state.loading),
 		error: state.error,
 	};
-}
-
-/**
- * @returns {Result}
- */
-export default function useFetchMe() {
-	const state = useQuery(QUERY_FETCH_ME);
-
-	return useResponse(state);
 }
