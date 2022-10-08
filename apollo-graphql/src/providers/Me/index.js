@@ -3,17 +3,17 @@ import useFetchMe from './useFetchMe';
 import PropTypes from 'prop-types';
 
 export default function Me({children}) {
-  const result = useFetchMe();
+	const result = useFetchMe();
 
-  return (
-    <ContextProvider {...result}>
-      {children}
-    </ContextProvider>
-  );
+	return (
+		<ContextProvider {...result}>
+			{children}
+		</ContextProvider>
+	);
 }
 
 Me.displayName = 'Me.DataProvider';
 
 Me.propTypes = {
-  children: PropTypes.node.isRequired,
+	children: PropTypes.node.isRequired,
 };

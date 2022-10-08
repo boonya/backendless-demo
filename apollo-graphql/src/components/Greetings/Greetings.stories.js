@@ -1,27 +1,27 @@
 import Greetings from '.';
-import ME_NONAME_RESPONSE from '../../providers/Me/__response__/noname';
+import withProvider from '../../../.storybook/decorators/wrapper';
 import MeFakeProvider from '../../providers/Me/FakeProvider';
-import withProvider from '../../../.storybook/decorators/withProvider';
+import ME_NONAME_RESPONSE from '../../providers/Me/__response__/noname.json';
 
 export default {title: 'components/Greetings'};
 
 export function Loading() {
-  return <Greetings />;
+	return <Greetings />;
 }
 Loading.decorators = [
-  withProvider(MeFakeProvider, {loading: true}),
+	withProvider(MeFakeProvider, {loading: true}),
 ];
 
 export function ShowName() {
-  return <Greetings />;
+	return <Greetings />;
 }
 ShowName.decorators = [
-  withProvider(MeFakeProvider),
+	withProvider(MeFakeProvider),
 ];
 
 export function ShowFallbackName() {
-  return <Greetings />;
+	return <Greetings />;
 }
 ShowFallbackName.decorators = [
-  withProvider(MeFakeProvider, ME_NONAME_RESPONSE),
+	withProvider(MeFakeProvider, ME_NONAME_RESPONSE),
 ];

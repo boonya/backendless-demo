@@ -1,4 +1,4 @@
-import {isLoggerEnabled} from './featureToggle';
+import {isLoggerEnabled} from '../featureToggle';
 
 function messageReducer(acc, cur) {
 	if (!acc.length) {

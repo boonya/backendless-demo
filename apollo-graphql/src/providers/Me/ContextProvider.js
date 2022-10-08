@@ -1,8 +1,8 @@
-import { ApolloError } from '@apollo/client';
-import PropTypes from 'prop-types';
-import {createContext} from 'react';
 import useSafeContext from '../../hooks/useSafeContext';
 import {ME_SHAPE} from './useFetchMe';
+import {ApolloError} from '@apollo/client';
+import PropTypes from 'prop-types';
+import {createContext} from 'react';
 
 const MeContext = createContext();
 
@@ -10,28 +10,28 @@ const MeContext = createContext();
  * @returns {import('./useFetchMe').Result}
  */
 export function useMe() {
-  return useSafeContext(MeContext);
+	return useSafeContext(MeContext);
 }
 
 export default function ContextProvider({children, ...props}) {
-  return (
-    <MeContext.Provider value={props}>
-      {children}
-    </MeContext.Provider>
-  );
+	return (
+		<MeContext.Provider value={props}>
+			{children}
+		</MeContext.Provider>
+	);
 }
 
 ContextProvider.displayName = 'Me.ContextProvider';
 
 ContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-  data: PropTypes.shape(ME_SHAPE),
-  error: PropTypes.instanceOf(ApolloError),
-  loading: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	data: PropTypes.shape(ME_SHAPE),
+	error: PropTypes.instanceOf(ApolloError),
+	loading: PropTypes.bool,
 };
 
 ContextProvider.defaultProps = {
-  data: undefined,
-  error: undefined,
-  loading: false,
+	data: undefined,
+	error: undefined,
+	loading: false,
 };

@@ -1,13 +1,12 @@
-import React from 'react';
-import Progressbar from '../Progressbar';
 import {useMe} from '../../providers/Me/ContextProvider';
+import Progressbar from '../Progressbar';
 
 export default function Greetings() {
-  const {data, loading} = useMe();
+	const {data, loading} = useMe();
 
-  if (loading) {
-    return <Progressbar />
-  }
+	if (loading) {
+		return <Progressbar />;
+	}
 
-  return <p>Hello, {data?.name ? data.name : 'Mr(s)'}!</p>;
+	return <p>Hello, {data?.name ? data.name : 'Mr(s)'}!</p>;
 }

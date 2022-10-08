@@ -1,7 +1,7 @@
-import {useQuery} from '@apollo/client';
-import PropTypes from 'prop-types';
 import {pick} from '../../utils/functions';
-import { loader } from 'graphql.macro';
+import {useQuery} from '@apollo/client';
+import {loader} from 'graphql.macro';
+import PropTypes from 'prop-types';
 
 const QUERY_FETCH_ME = loader('./FetchMe.gql');
 
@@ -14,11 +14,11 @@ const QUERY_FETCH_ME = loader('./FetchMe.gql');
  * @property {string} websiteUrl
  */
 export const ME_SHAPE = {
-  login: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  websiteUrl: PropTypes.string.isRequired,
+	login: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	avatarUrl: PropTypes.string.isRequired,
+	url: PropTypes.string.isRequired,
+	websiteUrl: PropTypes.string.isRequired,
 };
 
 /**
@@ -26,7 +26,7 @@ export const ME_SHAPE = {
  * @returns {Me}
  */
 function extract({data}) {
-  return pick(data?.viewer, Object.keys(ME_SHAPE));
+	return pick(data?.viewer, Object.keys(ME_SHAPE));
 }
 
 /**
@@ -40,18 +40,18 @@ function extract({data}) {
  * @returns {Result}
  */
 export function useResponse(state) {
-  return {
-    data: state.data && extract(state),
-    loading: Boolean(state.loading),
-    error: state.error,
-  }
+	return {
+		data: state.data && extract(state),
+		loading: Boolean(state.loading),
+		error: state.error,
+	};
 }
 
 /**
  * @returns {Result}
  */
 export default function useFetchMe() {
-  const state = useQuery(QUERY_FETCH_ME);
+	const state = useQuery(QUERY_FETCH_ME);
 
-  return useResponse(state);
+	return useResponse(state);
 }

@@ -2,27 +2,26 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 import {graphql} from 'msw';
 
 const mockedClient = new ApolloClient({
-  uri: 'fake-graphql',
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  },
+	uri: 'fake-graphql',
+	cache: new InMemoryCache(),
+	defaultOptions: {
+		watchQuery: {
+			fetchPolicy: 'no-cache',
+			errorPolicy: 'all',
+		},
+		query: {
+			fetchPolicy: 'no-cache',
+			errorPolicy: 'all',
+		},
+	},
 });
 
 export default function withApollo(props) {
-  // eslint-disable-next-line react/display-name
-  return (story) => (
-    <ApolloProvider client={mockedClient} {...props}>
-      {story()}
-    </ApolloProvider>
-  );
+	return (story) => (
+		<ApolloProvider client={mockedClient} {...props}>
+			{story()}
+		</ApolloProvider>
+	);
 }
 
 /**
@@ -35,18 +34,18 @@ export default function withApollo(props) {
  * @param {string} [operation]
  * @returns {Function}
  */
-function createMswCallback(response, options, operation) {
-  const delay = options?.delay || 300;
-  const statusCode = options?.statusCode || 200;
+function createMswCallback(response, options) {
+	const delay = options?.delay || 300;
+	const statusCode = options?.statusCode || 200;
 
-  return async (req, res, ctx) => {
-    return res(
-      ctx.delay(delay),
-      ctx.status(statusCode),
-      response?.data && ctx.data(response?.data),
-      response?.errors && ctx.errors(response?.errors),
-    );
-  };
+	return async (req, res, ctx) => {
+		return res(
+			ctx.delay(delay),
+			ctx.status(statusCode),
+			response?.data && ctx.data(response?.data),
+			response?.errors && ctx.errors(response?.errors),
+		);
+	};
 }
 
 /**
@@ -58,7 +57,7 @@ function createMswCallback(response, options, operation) {
  * @returns {object}
  */
 export function query(queryName, response, options) {
-  return graphql.query(queryName, createMswCallback(response, options, `query ${queryName}`));
+	return graphql.query(queryName, createMswCallback(response, options, `query ${queryName}`));
 }
 
 /**
@@ -70,5 +69,5 @@ export function query(queryName, response, options) {
  * @returns {object}
  */
 export function mutation(mutationName, response, options) {
-  return graphql.mutation(mutationName, createMswCallback(response, options, `mutation ${mutationName}`));
+	return graphql.mutation(mutationName, createMswCallback(response, options, `mutation ${mutationName}`));
 }

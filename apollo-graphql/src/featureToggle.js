@@ -1,3 +1,3 @@
 export function isLoggerEnabled() {
-  return true;
+	return true;
 }

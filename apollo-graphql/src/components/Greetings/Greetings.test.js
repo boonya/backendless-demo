@@ -1,35 +1,35 @@
 import Greetings from '.';
 import {useMe} from '../../providers/Me/ContextProvider';
+import ME_DATA from '../../providers/Me/__data__/successful.json';
 import {render, screen} from '@testing-library/react';
-import ME_DATA from '../../providers/Me/__data__/successful';
 
 jest.mock('../../providers/Me/ContextProvider');
 
 function renderComponent() {
-  return render(<Greetings />);
+	return render(<Greetings />);
 }
 
 it('should render progressbar.', () => {
-  useMe.mockReturnValue({loading: true});
+	useMe.mockReturnValue({loading: true});
 
-  renderComponent();
+	renderComponent();
 
-  expect(screen.queryByText(/Hello/u)).not.toBeInTheDocument();
-  screen.getByRole('progressbar');
+	expect(screen.queryByText(/Hello/u)).not.toBeInTheDocument();
+	screen.getByRole('progressbar');
 });
 
 it('should render user name.', () => {
-  useMe.mockReturnValue({data: ME_DATA});
+	useMe.mockReturnValue({data: ME_DATA});
 
-  renderComponent();
+	renderComponent();
 
-  screen.getByText('Hello, Dude Dudovich!');
+	screen.getByText('Hello, Dude Dudovich!');
 });
 
 it('should render "Dude" as a fallback value.', () => {
-  useMe.mockReturnValue({});
+	useMe.mockReturnValue({});
 
-  renderComponent();
+	renderComponent();
 
-  screen.getByText('Hello, Mr(s)!');
+	screen.getByText('Hello, Mr(s)!');
 });
