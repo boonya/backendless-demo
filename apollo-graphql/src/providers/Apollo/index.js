@@ -3,7 +3,6 @@ import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, from} from 
 import {setContext} from '@apollo/client/link/context';
 import {onError} from '@apollo/client/link/error';
 import PropTypes from 'prop-types';
-import {useMemo} from 'react';
 
 const httpLink = createHttpLink({
 	uri: process.env.REACT_APP_GITHUB_API,
@@ -37,15 +36,13 @@ const logErrors = onError(({operation, graphQLErrors, networkError}) => {
 	}
 });
 
-export default function ApolloBootstrap({children}) {
-	const client = useMemo(() => {
-		return new ApolloClient({
-			link: from([authLink, logErrors, httpLink]),
-			connectToDevTools: true,
-			cache: new InMemoryCache(),
-		});
-	}, []);
+const client = new ApolloClient({
+	link: from([authLink, logErrors, httpLink]),
+	connectToDevTools: true,
+	cache: new InMemoryCache(),
+});
 
+export default function Apollo({children}) {
 	return (
 		<ApolloProvider client={client}>
 			{children}
@@ -53,6 +50,6 @@ export default function ApolloBootstrap({children}) {
 	);
 }
 
-ApolloBootstrap.propTypes = {
+Apollo.propTypes = {
 	children: PropTypes.node.isRequired,
 };

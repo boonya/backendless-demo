@@ -1,15 +1,17 @@
 .progressbar {
-  animation: pulse-animation 2s infinite;
+	display: block;
+	margin: 1em 0;
+	animation: pulse-animation 2s infinite;
 }
 
 @keyframes pulse-animation {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }

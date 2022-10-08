@@ -14,7 +14,7 @@ export default function App() {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-              👋 Welcome to the GitHub GraphQL API 🐙
+						👋 Welcome to the GitHub GraphQL API 🐙
 					</a>
 				</header>
 			</div>

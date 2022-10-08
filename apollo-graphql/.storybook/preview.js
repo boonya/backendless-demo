@@ -1,3 +1,4 @@
+import ThemeProvider from '../src/providers/Theme';
 import withApollo from './decorators/withApollo';
 import {initialize, mswDecorator} from 'msw-storybook-addon';
 
@@ -5,6 +6,7 @@ import {initialize, mswDecorator} from 'msw-storybook-addon';
 initialize();
 
 export const decorators = [
+	(fn) => <ThemeProvider>{fn()}</ThemeProvider>,
 	withApollo(),
 	// Provide the MSW addon decorator globally
 	mswDecorator,
