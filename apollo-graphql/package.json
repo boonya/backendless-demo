@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "graphql": "^16.6.0",
     "graphql.macro": "^1.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
