@@ -1,0 +1,9 @@
+query FetchMe {
+  viewer {
+    login
+    name
+    avatarUrl
+    url
+    websiteUrl
+  }
+}

@@ -1,6 +1,9 @@
-import {useQuery, gql} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 import PropTypes from 'prop-types';
 import {pick} from '../../utils/functions';
+import { loader } from 'graphql.macro';
+
+const QUERY_FETCH_ME = loader('./FetchMe.gql');
 
 /**
  * @typedef {object} Me
@@ -48,15 +51,7 @@ export function useResponse(state) {
  * @returns {Result}
  */
 export default function useFetchMe() {
-  const state = useQuery(gql`query FetchMe {
-    viewer {
-      login
-      name
-      avatarUrl
-      url
-      websiteUrl
-    }
-  }`);
+  const state = useQuery(QUERY_FETCH_ME);
 
   return useResponse(state);
 }
