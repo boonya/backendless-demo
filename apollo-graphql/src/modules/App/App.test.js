@@ -1,12 +1,16 @@
 import App from '.';
+import wrapper from '../../../test/decorators/wrapper';
+import {makeQueryResult} from '../../../test/utils/apollo';
 import MeProvider from '../../providers/Me';
 import MeFakeProvider from '../../providers/Me/FakeProvider';
+import ME_RESPONSE_ERROR from '../../providers/Me/__response__/ValidationError.json';
+import ME_RESPONSE from '../../providers/Me/__response__/successful.json';
 import {render, screen} from '@testing-library/react';
 
 jest.mock('../../providers/Me');
 
 it('should render Greetings if loading.', () => {
-	MeProvider.mockImplementation(({children}) => <MeFakeProvider loading>{children}</MeFakeProvider>);
+	MeProvider.mockImplementation(wrapper(makeQueryResult({loading: true}), MeFakeProvider));
 
 	render(<App />);
 
@@ -14,11 +18,7 @@ it('should render Greetings if loading.', () => {
 });
 
 it('should render Greetings if error.', () => {
-	MeProvider.mockImplementation(({children}) => (
-		<MeFakeProvider data={null} error={new Error('Test error')}>
-			{children}
-		</MeFakeProvider>
-	));
+	MeProvider.mockImplementation(wrapper(makeQueryResult(ME_RESPONSE_ERROR), MeFakeProvider));
 
 	render(<App />);
 
@@ -26,7 +26,7 @@ it('should render Greetings if error.', () => {
 });
 
 it('should render Greetings if success.', () => {
-	MeProvider.mockImplementation(({children}) => <MeFakeProvider>{children}</MeFakeProvider>);
+	MeProvider.mockImplementation(wrapper(makeQueryResult(ME_RESPONSE), MeFakeProvider));
 
 	render(<App />);
 

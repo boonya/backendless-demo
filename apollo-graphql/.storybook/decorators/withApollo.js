@@ -29,16 +29,20 @@ export default function withApollo(props) {
  * @property {number} [options.statusCode] http status code (200 by default, 500 in case of error)
  * @property {number} [options.delay] delay to response in milliseconds (300 by default)
  *
- * @param {object} response
+ * @param {object||(request: object) => object} response
  * @param {MswCallbackOptions} [options]
  * @param {string} [operation]
  * @returns {Function}
  */
-function createMswCallback(response, options) {
+function createMswCallback(_response, options) {
 	const delay = options?.delay || 300;
 	const statusCode = options?.statusCode || 200;
 
 	return async (req, res, ctx) => {
+		const response = typeof _response === 'function'
+			? _response(req)
+			: _response;
+
 		return res(
 			ctx.delay(delay),
 			ctx.status(statusCode),
