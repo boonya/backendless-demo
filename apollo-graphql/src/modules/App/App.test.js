@@ -22,7 +22,7 @@ it('should render Greetings if error.', () => {
 
   render(<App />);
 
-  screen.getByText('Hello, Dude!');
+  screen.getByText('Hello, Mr(s)!');
 });
 
 it('should render Greetings if success.', () => {
@@ -30,5 +30,5 @@ it('should render Greetings if success.', () => {
 
   render(<App />);
 
-  screen.getByText('Hello, Serhii [boonya] Buinytskyi!');
+  screen.getByText('Hello, Dude Dudovich!');
 });

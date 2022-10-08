@@ -23,7 +23,7 @@ it('should render user name.', () => {
 
   renderComponent();
 
-  screen.getByText('Hello, Serhii [boonya] Buinytskyi!');
+  screen.getByText('Hello, Dude Dudovich!');
 });
 
 it('should render "Dude" as a fallback value.', () => {
@@ -31,5 +31,5 @@ it('should render "Dude" as a fallback value.', () => {
 
   renderComponent();
 
-  screen.getByText('Hello, Dude!');
+  screen.getByText('Hello, Mr(s)!');
 });
