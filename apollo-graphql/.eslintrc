@@ -59,7 +59,8 @@
 			"files": ["**/__response__/*", "**/__data__/*"],
 			"rules": {
 				"import/no-anonymous-default-export": "off",
-				"max-len": "off"
+				"max-len": "off",
+				"camelcase": "off"
 			}
 		}
 	]
