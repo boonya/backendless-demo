@@ -8,4 +8,6 @@ export default {
 		updatedAt: new Date('2022-09-12T11:08:19Z'),
 		createdAt: new Date('2011-05-10T13:45:18Z'),
 	},
+	loading: false,
+	error: undefined,
 };
