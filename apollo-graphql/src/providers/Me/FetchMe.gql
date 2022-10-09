@@ -1,5 +1,6 @@
 query FetchMe {
 	viewer {
+		id
 		login
 		name
 		avatarUrl

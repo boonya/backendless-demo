@@ -27,6 +27,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^2.13.5",
     "@graphql-codegen/schema-ast": "^2.5.1",
+    "@graphql-eslint/eslint-plugin": "^3.11.2",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",
