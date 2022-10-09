@@ -1,9 +1,9 @@
-import {ApolloError} from '@apollo/client';
+import {ApolloError} from '@apollo/client/errors';
 
 export function makeQueryResult(payload = {}) {
 	const {data, errors, loading} = payload;
 
-	const error = errors?.length
+	const error = Array.isArray(errors)
 		? new ApolloError({graphQLErrors: errors})
 		: undefined;
 

@@ -1,8 +1,6 @@
-import {ApolloError} from '@apollo/client';
+import {ApolloError} from '@apollo/client/errors';
 
 export default {
-	data: undefined,
-	loading: false,
 	error: new ApolloError({graphQLErrors: [{
 		message: 'An error occurred.',
 		name: 'Error',

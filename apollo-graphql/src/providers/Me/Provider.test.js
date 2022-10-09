@@ -2,10 +2,11 @@ import DataProvider from '.';
 import {renderComponent} from '../../../test/render';
 import {makeQueryResult} from '../../../test/utils/apollo';
 import ContextProvider from './ContextProvider';
-import ME_DATA from './__data__/successful';
-import ME_RESPONSE_ERROR from './__response__/ValidationError.json';
-import ME_RESPONSE from './__response__/successful.json';
-import {ApolloError, useQuery} from '@apollo/client';
+import VALIDATION_ERROR_RESULT from './__data__/ValidationError';
+import SUCCESSFUL_RESULT from './__data__/successful';
+import VALIDATION_ERROR_RESPONSE from './__response__/ValidationError.json';
+import SUCCESSFUL_RESPONSE from './__response__/successful.json';
+import {useQuery} from '@apollo/client';
 
 jest.mock('@apollo/client');
 jest.mock('./ContextProvider');
@@ -32,8 +33,8 @@ describe('should interpolate response on to the context', () => {
 		expect(ContextProvider).toBeCalledTimes(1);
 		expect(ContextProvider).toBeCalledWith({
 			children: 'children',
-			data: undefined,
 			loading: false,
+			data: undefined,
 			error: undefined,
 		}, {});
 	});
@@ -46,38 +47,37 @@ describe('should interpolate response on to the context', () => {
 		expect(ContextProvider).toBeCalledTimes(1);
 		expect(ContextProvider).toBeCalledWith({
 			children: 'children',
-			data: undefined,
 			loading: true,
+			data: undefined,
 			error: undefined,
 		}, {});
 	});
 
 	it('data', () => {
-		useQuery.mockReturnValue(makeQueryResult(ME_RESPONSE));
+		useQuery.mockReturnValue(makeQueryResult(SUCCESSFUL_RESPONSE));
 
 		render();
 
 		expect(ContextProvider).toBeCalledTimes(1);
 		expect(ContextProvider).toBeCalledWith({
 			children: 'children',
-			data: ME_DATA.data,
 			loading: false,
+			data: SUCCESSFUL_RESULT.data,
 			error: undefined,
 		}, {});
 	});
 
 	it('error', () => {
-		useQuery.mockReturnValue(makeQueryResult(ME_RESPONSE_ERROR));
+		useQuery.mockReturnValue(makeQueryResult(VALIDATION_ERROR_RESPONSE));
 
 		render();
 
 		expect(ContextProvider).toBeCalledTimes(1);
 		expect(ContextProvider).toBeCalledWith({
 			children: 'children',
-			data: undefined,
 			loading: false,
-			// error: expect.objectContaining({graphqlErrors: ME_RESPONSE_ERROR.errors})
-			error: expect.any(ApolloError),
+			data: undefined,
+			error: VALIDATION_ERROR_RESULT.error,
 		}, {});
 	});
 });

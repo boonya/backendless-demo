@@ -1,7 +1,7 @@
 import {renderHook} from '../../../test/render';
 import {makeQueryResult} from '../../../test/utils/apollo';
-import VALIDATION_ERROR_DATA from './__data__/ValidationError';
-import SUCCESSFUL_DATA from './__data__/successful';
+import VALIDATION_ERROR_RESULT from './__data__/ValidationError';
+import SUCCESSFUL_RESULT from './__data__/successful';
 import VALIDATION_ERROR_RESPONSE from './__response__/ValidationError.json';
 import SUCCESSFUL_RESPONSE from './__response__/successful.json';
 import useFetchMe from './useFetchMe';
@@ -13,12 +13,28 @@ function render() {
 	return renderHook(() => useFetchMe());
 }
 
+it('initial', () => {
+	useQuery.mockReturnValue({});
+
+	const {result} = render();
+
+	expect(result.current).toMatchApolloQueryResult();
+});
+
+it('loading', () => {
+	useQuery.mockReturnValue({loading: true});
+
+	const {result} = render();
+
+	expect(result.current).toMatchApolloQueryResult({loading: true});
+});
+
 it('successful', () => {
 	useQuery.mockReturnValue(makeQueryResult(SUCCESSFUL_RESPONSE));
 
 	const {result} = render();
 
-	expect(result.current).toEqual(SUCCESSFUL_DATA);
+	expect(result.current).toMatchApolloQueryResult(SUCCESSFUL_RESULT);
 });
 
 it('ValidationError', () => {
@@ -26,5 +42,5 @@ it('ValidationError', () => {
 
 	const {result} = render();
 
-	expect(result.current).toEqual(VALIDATION_ERROR_DATA);
+	expect(result.current).toMatchApolloQueryResult(VALIDATION_ERROR_RESULT);
 });
