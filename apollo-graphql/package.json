@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "graphql-codegen": "graphql-codegen --config .graphql-codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -24,6 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.5",
+    "@graphql-codegen/schema-ast": "^2.5.1",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",

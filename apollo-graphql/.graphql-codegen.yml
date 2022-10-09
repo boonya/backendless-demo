@@ -1,0 +1,7 @@
+schema: ${REACT_APP_GITHUB_API}
+headers:
+  Authorization: bearer ${REACT_APP_GITHUB_TOKEN}
+generates:
+  ./src/schema.graphql:
+    plugins:
+      - schema-ast
